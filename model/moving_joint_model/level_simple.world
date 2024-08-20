@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Define the boxes and their joints -->
+    <model name="sliding_boxes">
+      <static>false</static>
+
+      <link name="base">
+        <visual name="box0_visual">
+            <geometry>
+              <box>
+                <size>3 3 0.1</size>
+              </box>
+            </geometry>
+            <material>
+              <script>
+                <uri>file://media/materials/scripts/gazebo.material</uri>
+                <name>Gazebo/Orange</name>
+              </script>
+            </material>
+          </visual>
+          <collision name="box0_collision">
+            <geometry>
+              <box>
+                <size>3 3 0.1</size>
+              </box>
+            </geometry>
+          </collision>
+          <pose>0 0 -1.1 0 0 0</pose>
+        </link>
+      
+      <link name="box1">
+        <visual name="box1_visual">
+          <geometry>
+            <box>
+              <size>1 0.1 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Orange</name>
+            </script>
+          </material>
+        </visual>
+        <collision name="box1_collision">
+          <geometry>
+            <box>
+              <size>1 0.1 2</size>
+            </box>
+          </geometry>
+        </collision>
+        <pose>0 0 0 0 0 0</pose>
+      </link>
+
+      <link name="box2">
+        <visual name="box2_visual">
+          <geometry>
+            <box>
+              <size>1 0.1 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Blue</name>
+            </script>
+          </material>
+        </visual>
+        <collision name="box2_collision">
+          <geometry>
+            <box>
+              <size>1 0.1 2</size>
+            </box>
+          </geometry>
+        </collision>
+        <pose>0 0 3 0 0 0</pose>
+      </link>
+
+      <link name="box3">
+        <visual name="box3_visual">
+          <geometry>
+            <box>
+              <size>1 0.1 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Green</name>
+            </script>
+          </material>
+        </visual>
+        <collision name="box3_collision">
+          <geometry>
+            <box>
+              <size>1 0.1 2</size>
+            </box>
+          </geometry>
+        </collision>
+        <pose>0 0 6 0 0 0</pose>
+      </link>
+
+      <link name="box4">
+        <visual name="box4_visual">
+          <geometry>
+            <box>
+              <size>1 0.1 2</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <collision name="box4_collision">
+          <geometry>
+            <box>
+              <size>1 0.1 2</size>
+            </box>
+          </geometry>
+        </collision>
+        <pose>0 0 9 0 0 0</pose>
+      </link>
+
+      <!-- Define the joints -->
+      <joint name="joint1" type="prismatic">
+        <parent>base</parent>
+        <child>box1</child>
+        <pose>0 0 0 0 0 0</pose>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-5</lower>
+            <upper>5</upper>
+            <effort>100</effort>
+            <velocity>1</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+      <joint name="joint2" type="prismatic">
+        <parent>base</parent>
+        <child>box2</child>
+        <pose>0 0 1 0 0 0</pose>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-5</lower>
+            <upper>5</upper>
+            <effort>100</effort>
+            <velocity>1</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+      <joint name="joint3" type="prismatic">
+        <parent>base</parent>
+        <child>box3</child>
+        <pose>0 0 2 0 0 0</pose>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-5</lower>
+            <upper>5</upper>
+            <effort>100</effort>
+            <velocity>1</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+      <joint name="joint4" type="prismatic">
+        <parent>base</parent>
+        <child>box4</child>
+        <pose>0 0 3 0 0 0</pose>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-5</lower>
+            <upper>5</upper>
+            <effort>100</effort>
+            <velocity>1</velocity>
+          </limit>
+        </axis>
+      </joint>
+
+      <plugin name="multi_floor_door_control" filename="libmulti_floor_door_control.so"/>
+
+    </model>
+
+    <!-- Set the initial pose for the model -->
+    <pose>0 0 0 0 0 0</pose>
+  </world>
+</sdf> 
+
