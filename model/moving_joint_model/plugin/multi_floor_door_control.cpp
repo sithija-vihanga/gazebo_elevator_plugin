@@ -4,14 +4,15 @@
 #include <gazebo/msgs/msgs.hh>
 #include <gazebo/transport/transport.hh>
 #include <iostream>
-#include <thread>
-#include <chrono>
 
 namespace gazebo
 {
   class MultiFloorDoorControl : public ModelPlugin
   {
   public:
+    // Constructor
+    MultiFloorDoorControl() : door_opened(false), targetJoint(nullptr) {}
+
     void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) override
     {
       this->model = _model;
@@ -47,7 +48,6 @@ namespace gazebo
       int command = msg->data();
       this->targetJoint = nullptr;  // Reset target joint
       double velocity = 0.3; // The velocity to set for the active joint
-      double zero_velocity = 0.0;
 
       switch (command)
       {
@@ -89,21 +89,26 @@ namespace gazebo
     {
       if (this->targetJoint)
       {
-        // Set the desired position limit
-        double desiredPosition = 0.8;
-
-        // Check if the joint is moving toward the desired position
+        double desiredPosition = this->door_opened ? 0.0 : 0.8; // Determine desired position based on current state
         double currentPosition = this->targetJoint->Position(0);
-        if (currentPosition < desiredPosition)
+
+        // Move toward the desired position
+        if ((this->door_opened && currentPosition > desiredPosition) || 
+            (!this->door_opened && currentPosition < desiredPosition))
         {
-          // Move toward the desired position
-          this->SetJointVelocity(this->targetJoint, 0.3); // Move joint positively
+          double velocity = this->door_opened ? -0.3 : 0.3; // Set velocity based on direction
+          this->SetJointVelocity(this->targetJoint, velocity);
         }
         else
         {
           // Stop the joint once the desired position is reached
           this->SetJointVelocity(this->targetJoint, 0.0);
-          std::cout << "Joint reached target position!" << std::endl;
+          this->door_opened = !this->door_opened; // Toggle state
+          std::cout << (this->door_opened ? "Door Opened!" : "Door Closed!") << std::endl;
+          if(this->door_opened == 0){
+            this->targetJoint = nullptr; // Stop controlling the joint after reaching the target
+          }
+          
         }
       }
       else
@@ -132,10 +137,161 @@ namespace gazebo
     transport::NodePtr node;
     transport::SubscriberPtr sub;
     event::ConnectionPtr updateConnection; // Connection to the update event
+    bool door_opened; // State variable to track door status
   };
 
   GZ_REGISTER_MODEL_PLUGIN(MultiFloorDoorControl)
 }
+
+// #include <gazebo/gazebo.hh>
+// #include <gazebo/physics/physics.hh>
+// #include <gazebo/common/Plugin.hh>
+// #include <gazebo/msgs/msgs.hh>
+// #include <gazebo/transport/transport.hh>
+// #include <iostream>
+// #include <thread>
+// #include <chrono>
+
+// namespace gazebo
+// {
+//   class MultiFloorDoorControl : public ModelPlugin
+//   {
+//   public:
+//     void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) override
+//     {
+//       this->model = _model;
+//       this->door_opened = 0;
+
+//       // Get joints
+//       this->joint1 = this->model->GetJoint("joint1");
+//       this->joint2 = this->model->GetJoint("joint2");
+//       this->joint3 = this->model->GetJoint("joint3");
+//       this->joint4 = this->model->GetJoint("joint4");
+
+//       if (!this->joint1 || !this->joint2 || !this->joint3 || !this->joint4)
+//       {
+//         gzerr << "One or more joints not found!" << std::endl;
+//         return;
+//       }
+
+//       // Initialize Gazebo transport
+//       this->node = transport::NodePtr(new transport::Node());
+//       this->node->Init();
+
+//       // Subscribe to the ~/elevator topic
+//       this->sub = this->node->Subscribe("~/elevator", &MultiFloorDoorControl::OnMsg, this);
+
+//       std::cout << "MultiFloorDoorControl loaded successfully!" << std::endl;
+
+//       // Start a timer to update the control loop
+//       this->updateConnection = event::Events::ConnectWorldUpdateBegin(
+//           std::bind(&MultiFloorDoorControl::OnUpdate, this));
+//     }
+
+//     void OnMsg(ConstIntPtr &msg)
+//     {
+//       int command = msg->data();
+//       this->targetJoint = nullptr;  // Reset target joint
+//       double velocity = 0.3; // The velocity to set for the active joint
+//       double zero_velocity = 0.0;
+
+//       switch (command)
+//       {
+//         case 0:
+//           this->targetJoint = this->joint1;
+//           break;
+
+//         case 1:
+//           this->targetJoint = this->joint2;
+//           break;
+
+//         case 2:
+//           this->targetJoint = this->joint3;
+//           break;
+
+//         case 3:
+//           this->targetJoint = this->joint4;
+//           break;
+
+//         case 4:
+//           this->targetJoint = nullptr; // Stop all joints
+//           break;
+
+//         case 5:
+//           // Set reverse velocity for all joints
+//           this->SetJointVelocity(this->joint1, -velocity);
+//           this->SetJointVelocity(this->joint2, -velocity);
+//           this->SetJointVelocity(this->joint3, -velocity);
+//           this->SetJointVelocity(this->joint4, -velocity);
+//           break;
+
+//         default:
+//           std::cerr << "Unknown command: " << command << std::endl;
+//           break;
+//       }
+//     }
+
+//     void OnUpdate()
+//     {
+//       if (this->targetJoint)
+//       {
+//       if(this->door_opened == 0)
+//       {
+//         // Set the desired position limit
+//         double desiredPosition = 0.8;
+
+//         // Check if the joint is moving toward the desired position
+//         double currentPosition = this->targetJoint->Position(0);
+//         if (currentPosition < desiredPosition)
+//         {
+//           // Move toward the desired position
+//           this->SetJointVelocity(this->targetJoint, 0.3); // Move joint positively
+//         }
+//         else
+//         {
+//           // Stop the joint once the desired position is reached
+//           this->SetJointVelocity(this->targetJoint, 0.0);
+//           std::cout << "Door Opened!" << std::endl;
+//           this->door_opened = 1;
+//         }
+//       }
+//       else
+//         {
+//           std::cout << "Door Closed!" << std::endl;
+//           this->door_opened = 0;
+//           this->targetJoint = nullptr;
+//         }
+//       }
+//       else
+//       {
+//         // Stop all joints if no target joint is set
+//         this->SetJointVelocity(this->joint1, -0.3);
+//         this->SetJointVelocity(this->joint2, -0.3);
+//         this->SetJointVelocity(this->joint3, -0.3);
+//         this->SetJointVelocity(this->joint4, -0.3);
+//       }
+//     }
+
+//   private:
+//     void SetJointVelocity(physics::JointPtr joint, double velocity)
+//     {
+//       if (!joint) return;
+//       joint->SetVelocity(0, velocity); // Set the velocity of the joint
+//     }
+
+//     physics::ModelPtr model;
+//     physics::JointPtr joint1;
+//     physics::JointPtr joint2;
+//     physics::JointPtr joint3;
+//     physics::JointPtr joint4;
+//     physics::JointPtr targetJoint; // Pointer to the current target joint
+//     transport::NodePtr node;
+//     transport::SubscriberPtr sub;
+//     event::ConnectionPtr updateConnection; // Connection to the update event
+//   };
+
+//   GZ_REGISTER_MODEL_PLUGIN(MultiFloorDoorControl)
+// }
 
 //version 2.0
 // #include <gazebo/gazebo.hh>
