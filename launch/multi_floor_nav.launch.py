@@ -35,6 +35,7 @@ def generate_launch_description():
     z_pose = LaunchConfiguration('z_pose', default='10.0')
 
     world = os.path.join(get_package_share_directory('gazebo_plugins'), 'model', 'moving_joint_model', 'level_simple.world')
+    #world = os.path.join(get_package_share_directory('gazebo_plugins'), 'model', 'multiNav_indexed', 'indexed.world')
 
     gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(

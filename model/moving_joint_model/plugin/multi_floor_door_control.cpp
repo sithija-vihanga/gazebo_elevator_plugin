@@ -7,6 +7,7 @@
 #include <thread>
 #include <chrono>
 #include <ctime>
+#include <cmath>
 
 namespace gazebo
 {
@@ -14,7 +15,7 @@ namespace gazebo
   {
   public:
     // Constructor
-    MultiFloorDoorControl() : door_opened(false), targetJoint(nullptr), floorRequest(0), elevatorStep(0.001), initialReading(true) {}
+    MultiFloorDoorControl() : door_opened(false), targetJoint(nullptr), floorRequest(0), elevatorStep(0.004), initialReading(true) {}
 
     void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) override
     {
@@ -105,13 +106,21 @@ namespace gazebo
       {
         double elevatorPosition = this->elevator_joint->Position(2);
         //std::cout<< "Elevator position: "<<elevatorPosition <<std::endl;
+        double elevationGap = abs(elevatorPosition - this->floorRequest*3);
+        //std::cout<< "Elevator Gap: "<<elevationGap <<std::endl;
+        double elevationFactor = 1;
+        if(elevationGap < 1.0)
+        {
+          elevationFactor = elevationGap;
+        }
+
         if (elevatorPosition > this->floorRequest*3 + 0.05)
         {
-            this->elevator_joint->SetPosition(0, elevatorPosition - elevatorStep); 
+            this->elevator_joint->SetPosition(0, elevatorPosition - (elevatorStep * elevationFactor)/10);  // Going down
         }
         else if(elevatorPosition < this->floorRequest*3 - 0.05)
         {
-            this->elevator_joint->SetPosition(0, elevatorPosition + elevatorStep);
+            this->elevator_joint->SetPosition(0, elevatorPosition + (elevatorStep * elevationFactor));     // Going up
         }
         else
         {   
@@ -143,7 +152,7 @@ namespace gazebo
               {
                 this->endTimestamp = std::chrono::system_clock::now();
                 this->duration     = this->endTimestamp - this->initTimestamp;
-                if(this->duration.count() > 10.0)
+                if(this->duration.count() > 10000.0) // 10.0
                 {
                   //std::this_thread::sleep_for(std::chrono::seconds(3));
                   this->door_opened = !this->door_opened; // Toggle state
