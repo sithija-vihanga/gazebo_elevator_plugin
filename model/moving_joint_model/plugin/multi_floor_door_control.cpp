@@ -129,7 +129,7 @@ namespace gazebo
             }
             //std::cout<< "Elevator reached targetted floor! "<<std::endl;
 
-            double desiredPosition = this->door_opened ? 0.0 : 0.8; // Determine desired position based on current state
+            double desiredPosition = this->door_opened ? 0.0 : 1.0; // Determine desired position based on current state 0.8
             double currentPosition = this->targetJoint->Position(0);
             // Move toward the desired position
             if ((this->door_opened && currentPosition > desiredPosition) || 
@@ -152,7 +152,7 @@ namespace gazebo
               {
                 this->endTimestamp = std::chrono::system_clock::now();
                 this->duration     = this->endTimestamp - this->initTimestamp;
-                if(this->duration.count() > 10000.0) // 10.0
+                if(this->duration.count() > 10.0) // 10.0
                 {
                   //std::this_thread::sleep_for(std::chrono::seconds(3));
                   this->door_opened = !this->door_opened; // Toggle state

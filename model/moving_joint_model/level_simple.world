@@ -448,7 +448,8 @@
         <axis>
           <xyz>1 0 0</xyz>
           <limit>
-            <lower>0</lower>
+            <lower>-0.5</lower>
+            <!-- <lower>0</lower> -->
             <upper>1.5</upper>
             <effort>30</effort>
             <velocity>0.5</velocity>
@@ -462,7 +463,8 @@
         <axis>
           <xyz>1 0 0</xyz>
           <limit>
-            <lower>0</lower>
+            <lower>-0.5</lower>
+            <!-- <lower>0</lower> -->
             <upper>1.5</upper>
             <effort>30</effort>
             <velocity>0.5</velocity>
@@ -473,11 +475,12 @@
       <joint name="joint3" type="prismatic">
         <parent>level02_support</parent>
         <child>box3</child>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>-0.5 0 0 0 0 0</pose>
         <axis>
           <xyz>1 0 0</xyz>
           <limit>
-            <lower>0</lower>
+            <lower>-0.5</lower>
+            <!-- <lower>0</lower> -->
             <upper>1.5</upper>
             <effort>30</effort>
             <velocity>0.5</velocity>
@@ -492,7 +495,8 @@
         <axis>
           <xyz>1 0 0</xyz>
           <limit>
-            <lower>0</lower>
+            <lower>-0.5</lower>
+            <!-- <lower>0</lower> -->
             <upper>1.5</upper>
             <effort>30</effort>
             <velocity>0.5</velocity>
