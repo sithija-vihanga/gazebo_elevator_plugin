@@ -76,18 +76,18 @@
     <!-- Link: cube004 -->
     <link name="cube004">
       <visual name="cube004_visual">
-        <pose>0.0 0.0 6.5 0.0 0.0 0.0</pose>
+        <pose>0.0 0.0 6.5 0.0 0.0 0.8</pose>
         <geometry>
           <box>
-            <size>0.5 0.5 1.0</size>
+            <size>1.0 1.0 1.0</size>
           </box>
         </geometry>
       </visual>
       <collision name="cube004_collision">
-        <pose>0.0 0.0 6.5 0.0 0.0 0.0</pose>
+        <pose>0.0 0.0 6.5 0.0 0.0 0.8</pose>
         <geometry>
           <box>
-            <size>0.5 0.5 1.0</size>
+            <size>1.0 1.0 1.0</size>
           </box>
         </geometry>
       </collision>
@@ -100,7 +100,7 @@
     <!-- Link: cube005 -->
     <link name="cube005">
       <visual name="cube005_visual">
-        <pose>-1.5 0.0 6.5 0.0 0.0 0.0</pose>
+        <pose>-1.5 1.0 6.5 0.0 0.0 0.0</pose>
         <geometry>
           <box>
             <size>0.5 0.5 1.0</size>
@@ -108,7 +108,7 @@
         </geometry>
       </visual>
       <collision name="cube005_collision">
-        <pose>-1.5 0.0 6.5 0.0 0.0 0.0</pose>
+        <pose>-1.5 1.0 6.5 0.0 0.0 0.0</pose>
         <geometry>
           <box>
             <size>0.5 0.5 1.0</size>
@@ -124,18 +124,18 @@
     <!-- Link: cube006 -->
     <link name="cube006">
       <visual name="cube006_visual">
-        <pose>1.5 0.0 6.5 0.0 0.0 0.0</pose>
+        <pose>1.5 -1.5 6.5 0.0 0.0 0.0</pose>
         <geometry>
           <box>
-            <size>0.5 0.5 1.0</size>
+            <size>1.0 1.0 1.0</size>
           </box>
         </geometry>
       </visual>
       <collision name="cube006_collision">
-        <pose>1.5 0.0 6.5 0.0 0.0 0.0</pose>
+        <pose>1.5 -1.5 6.5 0.0 0.0 0.0</pose>
         <geometry>
           <box>
-            <size>0.5 0.5 1.0</size>
+            <size>1.0 1.0 1.0</size>
           </box>
         </geometry>
       </collision>

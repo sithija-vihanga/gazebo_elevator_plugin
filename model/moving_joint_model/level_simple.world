@@ -191,6 +191,56 @@
         </collision>
       </link>
 
+      <!-- <link name="elevator_support_rail_front">
+        <gravity>false</gravity>
+        <pose>-2.45 0.30 0.015 0 0 0</pose>
+        <visual name="elevator_support_rail_front_visual">
+          <geometry>
+            <box>
+              <size>10 0.002 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/White</name>
+            </script>
+          </material>
+        </visual>
+        <collision name="elevator_support_rail_front_collision">
+          <geometry>
+            <box>
+              <size>10 0.002 0.001</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+
+      <link name="elevator_support_rail_rear">
+        <gravity>false</gravity>
+        <pose>-2.45 1 0.015 0 0 0</pose>
+        <visual name="elevator_support_rail_rear_visual">
+          <geometry>
+            <box>
+              <size>10 0.002 0.001</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/White</name>
+            </script>
+          </material>
+        </visual>
+        <collision name="elevator_support_rail_rear_collision">
+          <geometry>
+            <box>
+              <size>10 0.002 0.001</size>
+            </box>
+          </geometry>
+        </collision>
+      </link> -->
+
       <link name="base">
         <pose>0 0 0 0 0 0</pose>
       </link>
@@ -217,6 +267,14 @@
               <size>4.90 2.95 0.029</size>
             </box>
           </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1000.0</mu>    <!-- Friction coefficient for lateral direction -->
+                <mu2>1000.0</mu2>  <!-- Friction coefficient for second direction -->
+              </ode>
+            </friction>
+        </surface>
         </collision>
         <pose>0.05 1.5 0 0 0 0</pose>
       </link>
@@ -391,6 +449,145 @@
         <pose>0 0 0 0 0 0</pose>
       </joint> -->
 
+      <link name="floor01_pannel_out">
+        <visual name="floor01_pannel_out_visual">
+          <geometry>
+            <box>
+              <size>0.1 0.01 0.5</size>
+            </box>
+          </geometry>
+          <material>
+          <script>
+            <uri>file://media/materials/scripts/pannel01.material</uri>
+            <name>Pannel01</name>
+          </script>
+          
+          </material>
+        </visual>
+        <pose>0.60 -0.06 4 0 0 0</pose>
+      </link>
+
+      <joint name="floor01_pannel_out_joint" type="fixed">
+        <parent>base</parent>
+        <child>floor01_pannel_out</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint>
+
+      <link name="floor02_pannel_out">
+        <visual name="floor02_pannel_out_visual">
+          <geometry>
+            <box>
+              <size>0.1 0.01 0.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Orange</name>
+            </script>
+          </material>
+        </visual>
+        <pose>0.60 -0.06 7 0 0 0</pose>
+      </link>
+
+      <joint name="floor02_pannel_out_joint" type="fixed">
+        <parent>base</parent>
+        <child>floor02_pannel_out</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint>
+
+      <link name="floor03_pannel_out">
+        <visual name="floor03_pannel_out_visual">
+          <geometry>
+            <box>
+              <size>0.1 0.01 0.5</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Orange</name>
+            </script>
+          </material>
+        </visual>
+        <pose>0.60 -0.06 10 0 0 0</pose>
+      </link>
+
+      <joint name="floor03_pannel_out_joint" type="fixed">
+        <parent>base</parent>
+        <child>floor03_pannel_out</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint>
+
+      <link name="floor01_pannel_in">
+        <visual name="floor01_pannel_in_visual">
+          <geometry>
+            <box>
+              <size>0.2 0.01 1.0</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Orange</name>
+            </script>
+          </material>
+        </visual>
+        <pose>-0.70 -0.03 4 0 0 0</pose>
+      </link>
+
+      <joint name="floor01_pannel_in_joint" type="fixed">
+        <parent>base</parent>
+        <child>floor01_pannel_in</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint>
+
+      <link name="floor02_pannel_in">
+        <visual name="floor02_pannel_in_visual">
+          <geometry>
+            <box>
+              <size>0.2 0.01 1.0</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Orange</name>
+            </script>
+          </material>
+        </visual>
+        <pose>-0.70 -0.03 7 0 0 0</pose>
+      </link>
+
+      <joint name="floor02_pannel_in_joint" type="fixed">
+        <parent>base</parent>
+        <child>floor02_pannel_in</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint>
+
+      <link name="floor03_pannel_in">
+        <visual name="floor03_pannel_in_visual">
+          <geometry>
+            <box>
+              <size>0.2 0.01 1.0</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Orange</name>
+            </script>
+          </material>
+        </visual>
+        <pose>-0.70 -0.03 10 0 0 0</pose>
+      </link>
+
+      <joint name="floor03_pannel_in_joint" type="fixed">
+        <parent>base</parent>
+        <child>floor03_pannel_in</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint>
+
       <joint name="connector" type="fixed">
         <parent>base</parent>
         <child>Floor_6</child>
@@ -426,6 +623,18 @@
         <child>elevator_handle_rear</child>
         <pose>0 0 0 0 0 0</pose>
       </joint>
+
+      <!-- <joint name="joint_elevator_rail_front" type="fixed">
+        <parent>elevator</parent>
+        <child>elevator_support_rail_front</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint>
+
+      <joint name="joint_elevator_rail_rear" type="fixed">
+        <parent>elevator</parent>
+        <child>elevator_support_rail_rear</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint> -->
 
       <joint name="elevator_joint" type="prismatic">
         <parent>elevator_support_left</parent>
