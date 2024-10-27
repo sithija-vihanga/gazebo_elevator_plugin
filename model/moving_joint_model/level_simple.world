@@ -482,9 +482,9 @@
           </geometry>
           <material>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Orange</name>
-            </script>
+            <uri>file://media/materials/scripts/pannel02.material</uri>
+            <name>Pannel02</name>
+          </script>
           </material>
         </visual>
         <pose>0.60 -0.06 7 0 0 0</pose>
@@ -505,9 +505,9 @@
           </geometry>
           <material>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Orange</name>
-            </script>
+              <uri>file://media/materials/scripts/pannel03.material</uri>
+              <name>Pannel03</name>
+          </script>
           </material>
         </visual>
         <pose>0.60 -0.06 10 0 0 0</pose>
@@ -528,9 +528,9 @@
           </geometry>
           <material>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Orange</name>
-            </script>
+              <uri>file://media/materials/scripts/pannelIn01.material</uri>
+              <name>PannelIn01</name>
+          </script>
           </material>
         </visual>
         <pose>-0.70 -0.03 4 0 0 0</pose>
@@ -551,9 +551,9 @@
           </geometry>
           <material>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Orange</name>
-            </script>
+              <uri>file://media/materials/scripts/pannelIn02.material</uri>
+              <name>PannelIn02</name>
+          </script>
           </material>
         </visual>
         <pose>-0.70 -0.03 7 0 0 0</pose>
@@ -574,9 +574,9 @@
           </geometry>
           <material>
             <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Orange</name>
-            </script>
+              <uri>file://media/materials/scripts/pannelIn03.material</uri>
+              <name>PannelIn03</name>
+          </script>
           </material>
         </visual>
         <pose>-0.70 -0.03 10 0 0 0</pose>
