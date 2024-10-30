@@ -559,6 +559,63 @@
         <pose>-0.70 -0.03 7 0 0 0</pose>
       </link>
 
+      <link name="light_link">
+        <light name="point_light_floor01_in" type="point">
+          <pose>0.60 -1.0 4 0 0 0</pose>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <attenuation>
+            <range>10</range>
+            <linear>0.2</linear>
+            <constant>0.1</constant>
+            <quadratic>0.05</quadratic>
+          </attenuation>
+        </light>
+
+        <light name="point_light_floor01_out" type="point">
+          <pose>0.60 1.0 4 0 0 0</pose>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <attenuation>
+            <range>10</range>
+            <linear>0.2</linear>
+            <constant>0.1</constant>
+            <quadratic>0.05</quadratic>
+          </attenuation>
+        </light>
+
+        <light name="point_light_floor02_in" type="point">
+          <pose>-0.70 1.0 7 0 0 0</pose>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <attenuation>
+            <range>10</range>
+            <linear>0.2</linear>
+            <constant>0.1</constant>
+            <quadratic>0.05</quadratic>
+          </attenuation>
+        </light>
+
+        <light name="point_light_floor02_out" type="point">
+          <pose>0.60 -1.0 7 0 0 0</pose>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <attenuation>
+            <range>10</range>
+            <linear>0.2</linear>
+            <constant>0.1</constant>
+            <quadratic>0.05</quadratic>
+          </attenuation>
+        </light>
+      </link>
+
+      <joint name="light_joint" type="fixed">
+        <parent>base</parent>
+        <child>light_link</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint>
+
+
       <joint name="floor02_pannel_in_joint" type="fixed">
         <parent>base</parent>
         <child>floor02_pannel_in</child>
