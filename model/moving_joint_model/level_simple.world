@@ -464,7 +464,7 @@
           
           </material>
         </visual>
-        <pose>0.60 -0.06 4 0 0 0</pose>
+        <pose>0.60 -0.06 4.2 0 0 0</pose>
       </link>
 
       <joint name="floor01_pannel_out_joint" type="fixed">
@@ -487,7 +487,7 @@
           </script>
           </material>
         </visual>
-        <pose>0.60 -0.06 7 0 0 0</pose>
+        <pose>0.60 -0.06 7.2 0 0 0</pose>
       </link>
 
       <joint name="floor02_pannel_out_joint" type="fixed">
@@ -510,7 +510,7 @@
           </script>
           </material>
         </visual>
-        <pose>0.60 -0.06 10 0 0 0</pose>
+        <pose>0.60 -0.06 10.2 0 0 0</pose>
       </link>
 
       <joint name="floor03_pannel_out_joint" type="fixed">
@@ -558,6 +558,12 @@
         </visual>
         <pose>-0.70 -0.03 7 0 0 0</pose>
       </link>
+
+      <joint name="floor02_pannel_in_joint" type="fixed">
+        <parent>base</parent>
+        <child>floor02_pannel_in</child>
+        <pose>0 0 0 0 0 0</pose>
+      </joint>
 
       <link name="light_link">
         <light name="point_light_floor01_in" type="point">
@@ -639,12 +645,6 @@
         <pose>0 0 0 0 0 0</pose>
       </joint>
 
-
-      <joint name="floor02_pannel_in_joint" type="fixed">
-        <parent>base</parent>
-        <child>floor02_pannel_in</child>
-        <pose>0 0 0 0 0 0</pose>
-      </joint>
 
       <link name="floor03_pannel_in">
         <visual name="floor03_pannel_in_visual">
